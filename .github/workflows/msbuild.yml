@@ -1,0 +1,106 @@
+name: Build and Test
+
+on: [push]
+
+env:
+  # Path to the solution file relative to the root of the project.
+  SOLUTION_FILE_PATH: ListTreeControl.sln
+
+jobs:
+  builddebug:
+    name: Build debug
+    runs-on: windows-2019
+
+    steps:
+    - name: Checkout files
+      uses: actions/checkout@v3
+      with:
+        submodules: true
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Restore NuGet packages
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Build debug
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /m /t:Rebuild /p:Configuration=Debug /p:Platform="Any CPU" ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Upload test binaries
+      uses: actions/upload-artifact@v3
+      with:
+        name: listtreecontroltests-debug
+        path: ListTreeControlTests\bin\Debug\
+
+  buildrelease:
+    name: Build release
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout files
+      uses: actions/checkout@v3
+      with:
+        submodules: true
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Restore NuGet packages
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Build release
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /m /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Upload test binaries
+      uses: actions/upload-artifact@v3
+      with:
+        name: listtreecontroltests-release
+        path: ListTreeControlTests\bin\Release\
+
+  test:
+    name: Test
+    needs: buildrelease
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout files
+      uses: actions/checkout@v3
+      with:
+        submodules: true
+
+    - name: Download test binaries
+      uses: actions/download-artifact@v2
+      with:
+        name: listtreecontroltests-release
+        path: bin
+
+    - name: Install NUnit
+      run: nuget install NUnit.ConsoleRunner -Version 3.11.1
+
+    - name: Run unit tests
+      run: .\\NUnit.ConsoleRunner.3.11.1\\tools\\nunit3-console.exe bin\\ListTreeControlTests.dll --result ListTreeControl-test.xml --result "ListTreeControl-junit.xml;transform=nunit3-junit.xslt"
+
+    - name: Annotate job with results
+      uses: EnricoMi/publish-unit-test-result-action/composite@v1
+      if: always()
+      with:
+        files: ListTreeControl-junit.xml
+ 
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: NUnit Tests
+        path: ListTreeControl-junit.xml
+        reporter: jest-junit
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: ListTreeControl-test
+        path: ListTreeControl-test.xml
