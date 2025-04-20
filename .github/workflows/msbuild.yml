@@ -29,7 +29,7 @@ jobs:
       run: msbuild /m /t:Rebuild /p:Configuration=Debug /p:Platform="Any CPU" ${{env.SOLUTION_FILE_PATH}}
 
     - name: Upload test binaries
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: listtreecontroltests-debug
         path: ListTreeControlTests\bin\Debug\
@@ -56,7 +56,7 @@ jobs:
       run: msbuild /m /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" ${{env.SOLUTION_FILE_PATH}}
 
     - name: Upload test binaries
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: listtreecontroltests-release
         path: ListTreeControlTests\bin\Release\
@@ -99,7 +99,7 @@ jobs:
         reporter: jest-junit
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: ListTreeControl-test
