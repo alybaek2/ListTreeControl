@@ -84,6 +84,14 @@ jobs:
     - name: Run unit tests
       run: .\\NUnit.ConsoleRunner.3.11.1\\tools\\nunit3-console.exe bin\\ListTreeControlTests.dll --result ListTreeControl-test.xml
 
+    - name: Test Report
+      uses: dorny/test-reporter@v2
+      if: always()
+      with:
+        name: NUnit Tests
+        path: ListTreeControl-test.xml
+        reporter: dotnet-nunit
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       if: always()
