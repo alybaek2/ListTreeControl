@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListTreeControl", "ListTreeControl\ListTreeControl.csproj", "{85B61DB9-52DD-413E-BD1D-DEB3A7F60714}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListTreeControlTests", "ListTreeControlTests\ListTreeControlTests.csproj", "{D710DF8D-DDA7-4BC6-98D9-A3E39D9BA95B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85B61DB9-52DD-413E-BD1D-DEB3A7F60714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85B61DB9-52DD-413E-BD1D-DEB3A7F60714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85B61DB9-52DD-413E-BD1D-DEB3A7F60714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85B61DB9-52DD-413E-BD1D-DEB3A7F60714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D710DF8D-DDA7-4BC6-98D9-A3E39D9BA95B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D710DF8D-DDA7-4BC6-98D9-A3E39D9BA95B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D710DF8D-DDA7-4BC6-98D9-A3E39D9BA95B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D710DF8D-DDA7-4BC6-98D9-A3E39D9BA95B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {705E0674-5F65-4F45-BDE1-0DD47ABB3006}
+	EndGlobalSection
+EndGlobal
