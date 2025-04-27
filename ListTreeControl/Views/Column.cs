@@ -6,9 +6,33 @@ namespace ListTree
 {
     public abstract class Column : INotifyPropertyChanged
     {
+        public Column()
+        {
+            _width = 100;
+        }
+
         public string Name { get; set; }
         internal ListTreeControl ListTreeControl { get; set; }
         internal abstract object GetUIElements();
+
+        public double Width
+        {
+            get
+            {
+                return _width;
+            }
+
+            set
+            {
+                if (_width == value)
+                {
+                    return;
+                }
+
+                _width = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int Index
         {
@@ -48,6 +72,7 @@ namespace ListTree
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private double _width;
         private int _index;
     }
 }

@@ -175,11 +175,25 @@ namespace ListTree
             {
                 headerGridColumn = new ColumnDefinition
                 {
-                    Width = new GridLength(100)
+                    Width = new GridLength(column.Width),
+                    Tag = column
                 };
 
                 _headerColumnDefinitionCache.Add(column, headerGridColumn);
             }
+
+            void ColumnPropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                if (e.PropertyName == nameof(Column.Width))
+                {
+                    if (headerGridColumn.Width.Value != column.Width)
+                    {
+                        headerGridColumn.Width = new GridLength(column.Width); ;
+                    }
+                }
+            }
+
+            column.PropertyChanged += ColumnPropertyChanged;
 
             return headerGridColumn;
         }
@@ -208,7 +222,6 @@ namespace ListTree
         private ColumnDefinition GetColumnDefinition(Column column)
         {
             ColumnDefinition headerGridColumn = GetHeaderColumnDefinition(column);
-
 
             Binding widthBinding = new Binding(ColumnDefinition.WidthProperty.Name)
             {
@@ -431,6 +444,13 @@ namespace ListTree
         private void Grid_LayoutUpdated(object sender, EventArgs e)
         {
             UpdateRows();
+
+            // Update the widths of the columns.
+            for (int i = 0; i < _gridHeader.ColumnDefinitions.Count; i += 2)
+            {
+                Column column = (Column)_gridHeader.ColumnDefinitions[i].Tag;
+                column.Width = _gridHeader.ColumnDefinitions[i].Width.Value;
+            }
         }
 
         private bool _ascending;
