@@ -308,10 +308,30 @@ namespace ListTree
 
         private CollectionContainer CreateHeaderUIElements(Column columnDef)
         {
+            TranslateTransform transform = new TranslateTransform
+            {
+                X = 0
+            };
+
+            Binding binding = new Binding(ScrollViewer.VerticalOffsetProperty.Name)
+            {
+                Source = _scroller,
+                Mode = BindingMode.OneWay
+            };
+
+            BindingOperations.SetBinding(transform, TranslateTransform.YProperty, binding);
+
+            GridSplitter splitter = CreateHeaderSplitter(columnDef);
+            Button button = CreateHeaderButton(columnDef);
+
+            // Ensure that the header always appears at the top of the control.
+            splitter.RenderTransform = transform;
+            button.RenderTransform = transform;
+
             List<UIElement> uiElements = new List<UIElement>
             {
-                CreateHeaderSplitter(columnDef),
-                CreateHeaderButton(columnDef)
+                splitter,
+                button
             };
 
             return CreateContainer(uiElements);
