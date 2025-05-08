@@ -71,6 +71,10 @@
     <Compile Include="Views\TextColumn.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\DiagramColumnResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ListTreeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

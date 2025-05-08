@@ -11,6 +11,14 @@ namespace ListTree
         public DiagramColumn()
         {
             _cells = new Dictionary<Tuple<int, int>, DiagramCell>();
+
+            Template = (DataTemplate)_resourceDictionary["DefaultTemplate"];
+        }
+
+        static DiagramColumn()
+        {
+            _resourceDictionary = new ResourceDictionary();
+            _resourceDictionary.Source = new Uri("/ListTreeControl;component/Resources/DiagramColumnResources.xaml", UriKind.RelativeOrAbsolute);
         }
 
         internal override object GetUIElements()
@@ -57,5 +65,7 @@ namespace ListTree
         private ListTreeViewModel _viewModel;
 
         private readonly Dictionary<Tuple<int, int>, DiagramCell> _cells;
+
+        private static ResourceDictionary _resourceDictionary;
     }
 }
