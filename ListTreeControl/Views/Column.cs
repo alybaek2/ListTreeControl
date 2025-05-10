@@ -1,5 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Data;
 
 namespace ListTree
@@ -9,6 +12,14 @@ namespace ListTree
         public Column()
         {
             _width = 100;
+        }
+
+        static Column()
+        {
+            Resources = new ResourceDictionary
+            {
+                Source = new Uri("/ListTreeControl;component/Resources/ColumnResources.xaml", UriKind.RelativeOrAbsolute)
+            };
         }
 
         public string Name { get; set; }
@@ -58,7 +69,7 @@ namespace ListTree
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        static protected Binding CreateBinding(string sourcePropertyName, object source)
+        protected static Binding CreateBinding(string sourcePropertyName, object source)
         {
             return
                 new Binding(sourcePropertyName)
@@ -70,7 +81,11 @@ namespace ListTree
                 };
         }
 
+        public DataTemplate Template { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected static ResourceDictionary Resources;
 
         private double _width;
         private int _index;

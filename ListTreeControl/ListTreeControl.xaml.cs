@@ -73,6 +73,7 @@ namespace ListTree
 
             _uiElements.Clear();
 
+            NodeViews = ListTree.NodesByVerticalIndex.ActiveTransform(x => new NodeView(this, x));
             CompositeCollection columnUIElements = new CompositeCollection();
             TransformColumns(x => x.GetUIElements(), columnUIElements);
             _uiElements.Add(CreateContainer(columnUIElements));
@@ -161,6 +162,8 @@ namespace ListTree
         }
 
         public ReadOnlyObservableCollection<RowDefinition> RowDefinitions { get; }
+
+        public ReadOnlyObservableCollection<NodeView> NodeViews { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

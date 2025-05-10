@@ -68,10 +68,11 @@
     <Compile Include="Views\DiagramColumn.cs" />
     <Compile Include="Views\DiagramConnectorView.cs" />
     <Compile Include="Views\NodeView.cs" />
+    <Compile Include="Views\SimpleColumn.cs" />
     <Compile Include="Views\TextColumn.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Resources\DiagramColumnResources.xaml">
+    <Page Include="Resources\ColumnResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -1,5 +1,8 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <DataTemplate x:Key="DefaultTemplate">
+    <DataTemplate x:Key="TextTemplate">
+        <TextBlock x:Name="textBlock" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Margin="1,1,1,1"/>
+    </DataTemplate>
+    <DataTemplate x:Key="DefaultDiagramTemplate">
         <Canvas ClipToBounds="True">
             <ItemsControl ItemsSource="{Binding BranchViews}">
                 <ItemsControl.ItemsPanel>
