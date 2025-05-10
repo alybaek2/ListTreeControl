@@ -44,6 +44,16 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ViewModel.Node.Data}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
                             <Path Stroke="White" StrokeThickness="1.5" Fill="Black">
                                 <Path.Data>
                                     <EllipseGeometry RadiusX="3.75" RadiusY="3.75" Center="{Binding Cell.Center}"/>
